@@ -3,10 +3,10 @@ version: '3'
 services:
 
   db:
-    image: postgres:15.5-bullseye
+    image: ${DB_IMAGE}
     container_name: tct-32-db
     ports:
-      - 54321:5432
+      - ${DB_PORTS}
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -17,12 +17,12 @@ services:
   app:
     build: 
       dockerfile: Dockerfile
-    image: pongsakon/app:1.0.0
+    image: ${APP_IMAGE}
     container_name: tct-32-app
     ports:
-      - 13377:1337
+      - ${APP_PORTS}
     environment:
-      - DATABASE_CLIENT=postgres
+      - DATABASE_CLIENT=${DATABASE_CLIENT}
       - DATABASE_HOST=db
       - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_NAME=${DATABASE_NAME}
