@@ -13,6 +13,7 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     networks:
       - tct-32-network
+    restart: always
 
   app:
     build: 
@@ -33,6 +34,7 @@ services:
       - tct-32-network
     depends_on:
       - db
+    restart: always
 
 networks:
   tct-32-network:
