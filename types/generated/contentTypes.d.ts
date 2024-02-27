@@ -908,6 +908,7 @@ export interface ApiSubjectSubject extends Schema.CollectionType {
     singularName: 'subject';
     pluralName: 'subjects';
     displayName: 'Subject';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -919,6 +920,7 @@ export interface ApiSubjectSubject extends Schema.CollectionType {
       'oneToMany',
       'api::class-room.class-room'
     >;
+    subject_id: Attribute.UID<'api::subject.subject', 'name'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
