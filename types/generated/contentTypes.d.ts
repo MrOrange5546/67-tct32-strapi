@@ -803,6 +803,16 @@ export interface ApiClassRoomClassRoom extends Schema.CollectionType {
       'manyToMany',
       'api::student.student'
     >;
+    subject: Attribute.Relation<
+      'api::class-room.class-room',
+      'manyToOne',
+      'api::subject.subject'
+    >;
+    room: Attribute.Relation<
+      'api::class-room.class-room',
+      'manyToOne',
+      'api::room.room'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -832,6 +842,11 @@ export interface ApiRoomRoom extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required & Attribute.Unique;
+    class_rooms: Attribute.Relation<
+      'api::room.room',
+      'oneToMany',
+      'api::class-room.class-room'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -889,6 +904,11 @@ export interface ApiSubjectSubject extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required & Attribute.Unique;
+    class_rooms: Attribute.Relation<
+      'api::subject.subject',
+      'oneToMany',
+      'api::class-room.class-room'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

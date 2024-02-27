@@ -23,6 +23,18 @@
       "relation": "manyToMany",
       "target": "api::student.student",
       "inversedBy": "class_rooms"
+    },
+    "subject": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::subject.subject",
+      "inversedBy": "class_rooms"
+    },
+    "room": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::room.room",
+      "inversedBy": "class_rooms"
     }
   }
 }
