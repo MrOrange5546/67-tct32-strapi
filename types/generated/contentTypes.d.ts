@@ -933,6 +933,7 @@ export interface ApiTeacherTeacher extends Schema.CollectionType {
     singularName: 'teacher';
     pluralName: 'teachers';
     displayName: 'Teacher';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -944,6 +945,15 @@ export interface ApiTeacherTeacher extends Schema.CollectionType {
       'oneToMany',
       'api::class-room.class-room'
     >;
+    phone_number: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 10;
+      }>;
+    email: Attribute.Email & Attribute.Required & Attribute.Unique;
+    birthday: Attribute.Date & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

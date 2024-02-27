@@ -4,7 +4,8 @@
   "info": {
     "singularName": "teacher",
     "pluralName": "teachers",
-    "displayName": "Teacher"
+    "displayName": "Teacher",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,6 +21,22 @@
       "relation": "oneToMany",
       "target": "api::class-room.class-room",
       "mappedBy": "teacher"
+    },
+    "phone_number": {
+      "type": "string",
+      "required": true,
+      "maxLength": 10,
+      "unique": true,
+      "minLength": 10
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "birthday": {
+      "type": "date",
+      "required": true
     }
   }
 }
