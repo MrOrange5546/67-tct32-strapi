@@ -863,6 +863,7 @@ export interface ApiStudentStudent extends Schema.CollectionType {
     singularName: 'student';
     pluralName: 'students';
     displayName: 'Student';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -874,6 +875,15 @@ export interface ApiStudentStudent extends Schema.CollectionType {
       'manyToMany',
       'api::class-room.class-room'
     >;
+    phone_number: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        minLength: 10;
+        maxLength: 10;
+      }>;
+    email: Attribute.Email & Attribute.Required;
+    birthday: Attribute.Date & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
