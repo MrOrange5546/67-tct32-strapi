@@ -1,18 +1,28 @@
-const crypto = require("crypto");
-const md5 = require("md5");
+// import { SHA256 } from 'crypto-js';
+// const cryptoJS = require('crypto-js')
+const appId = 'api::student.student'
+
 
 module.exports = {
   async beforeCreate(event) {
-    console.log(`beforeCreate is working...`, event.params.data);
-    const sha256 = crypto.createHash("sha256");
-    sha256.update(event.params.data.phone_number);
-    const hash = sha256.digest("hex");
-    event.params.data.phone_number = hash;
+    const phone = event.params.data.phone_number
+    event.params.data.phone_number = await strapi.service(appId).encrypt(phone)
   },
-  async afterCreate(event) {
-    console.log(`afterCreate is working...`, event.params.data);
-    const md5_128 = md5(event.params.data.phone_number);
-    const decode = md5_128.slice(0, 10);
-    event.params.data.phone_number = decode;
-  }
+
+  async afterFindOne(event) {
+    if (event.result && event.result.phone_number) {
+      const phone = event.result.phone_number;
+      event.result.phone_number = await strapi.service(appId).decrypt(phone);
+    }
+  },
+
+  async afterFindMany(event) {
+    if (event.result) {
+      await Promise.all(event.result.map(async result => {
+        if (result && result.phone_number) {
+          result.phone_number = await strapi.service(appId).decrypt(result.phone_number);
+        }
+      }));
+    }
+  },
 };
